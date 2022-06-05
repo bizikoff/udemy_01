@@ -1,100 +1,46 @@
 'use strict';
 
-/* Задание на урок:
+const box = document.getElementById('box'),
+      btns = document.getElementsByTagName('button'),
+      circles = document.getElementsByClassName('circle'),
+      wrapper = document.querySelector('.wrapper'),
+      hearts = wrapper.querySelectorAll('.heart'),
+      oneHeart = wrapper.querySelector('.heart');
 
-1) У нас уже есть рабочее приложение, состоящее из отдельных функций. Представьте, что
-перед вами стоит задача переписать его так, чтобы все функции стали методами объекта personalMovieDB
-Такое случается в реальных продуктах при смене технологий или подхода к архитектуре программы
+// box.style.backgroundColor = 'blue';
 
-2) Создать метод toggleVisibleMyDB, который при вызове будет проверять свойство privat. Если оно false - он
-переключает его в true, если true - переключает в false. Протестировать вместе с showMyDB.
+box.style.cssText = 'background-color: blue; width: 340px';
 
-3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
-Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
-при помощи метода forEach вывести в консоль сообщения в таком виде:
-"Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
+btns[1].style.borderRadius = '100%';
 
+circles[0].style.backgroundColor = 'red';
 
-const personalMovieDB = {
-  count: 0,
-  movies: {},
-  actors: {},
-  genres: [],
-  privat: false,
-  start: function () {
-    this.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
-    while (this.count == '' || this.count == null || isNaN(this.count)) {
-      this.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
-    }
-  },
-  rememberMyFilms: function () {
-    for (let i = 0; i < 2; i++) {
-      const a = prompt('Один из последних просмотренных фильмов', '').trim();
-      const b = prompt('На сколько оцените его?', '');
-      if (a != null && b != null && a != '' && b != '' && a.length < 50 && b.length < 50) {
-        this.movies[a] = b;
-        console.log('done');
-      } else {
-        console.log('error');
-        i--;
-      }
-    }
-  },
-  writeYourGenres: function () {
-    for (let i = 0; i < 1; i++) {
-      let genres = prompt(`Введите ваши любимые жанры через запятую`).trim().toLowerCase();
-      if (genres == '' || genres == null) {
-        console.log("Вы ввели некоректные данные или не ввели вовсе");
-        i--;
-      } else {
-        this.genres = genres.split(', ');
-        this.genres.sort();
-      }
-      // let genre = prompt(`Ваш любимый жанр под номером ${i + 1}`).trim();
-      // if (genre == '' || genre == null) {
-      //   console.log("Вы ввели некоректные данные или не ввели вовсе");
-      //   i--;
-      // } else {
-      //   this.genres[i] = genre;
-      // }
-    }
-    this.genres.forEach((item, i) => {
-      console.log(`Любимый жанр ${i + 1} - это ${item}`);
-    });
-  },
-  detectPersonalLevel: function () {
-    if (this.count < 10) {
-      console.log('Просмотренно довольно мало фильмов');
-    } else if (this.count >= 10 && this.count <= 30) {
-      console.log('Вы классический зритель');
-    } else if (this.count > 30) {
-      console.log('Вы киноман!');
-    } else {
-      console.log('Произошла ошибка!');
-    }
-  },
-  showMyDB: function (hidden) {
-    if (!hidden) {
-      console.log(personalMovieDB);
-    }
-  },
-  toggleVisibleMyDB: function () {
-    if (this.privat) {
-      this.privat = false;
-    } else {
-      this.privat = true;
-    }
-  }
-};
+// for (let i = 0; i < hearts.length; i++) {
+//   hearts[i].style.backgroundColor = 'green';
+// }
 
-// personalMovieDB.start();
+hearts.forEach(item => {
+  item.style.backgroundColor = 'purple';
+});
 
-// personalMovieDB.rememberMyFilms();
+const div = document.createElement('div');
 
-// personalMovieDB.writeYourGenres();
+div.classList.add('black');
 
-// personalMovieDB.detectPersonalLevel();
+// wrapper.append(div); // вставляет элемент в конец родителя
+wrapper.prepend(div); // вставляет элемент в конец родителя
 
-// // personalMovieDB.toggleVisibleMyDB();
+// hearts[0].after(div);
 
-// personalMovieDB.showMyDB(personalMovieDB.privat);
+// circles[0].remove();
+
+// hearts[0].replaceWith(circles[0]);
+
+// ________________________
+
+div.innerHTML = '<h3>Hello world</h3>';
+
+// div.textContent = 'Hello';   //only text
+
+div.insertAdjacentHTML('beforebegin', '<h2>Zdraste</h2>');
+
